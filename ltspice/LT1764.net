@@ -1,0 +1,32 @@
+*LTspice
+*
+*LT1764
+*3A, Fast Transient Response, Low Noise, LDO Regulators
+*AE01005764
+*
+*netlist
+.include LT1764.cir
+*
+*line regulation
+*.param RADJU=277k
+*.param RADJB=249k
+*.param VSOURCE=20
+*.param ILOAD=1
+*.dc V1 4 {VSOURCE} 1m
+*
+*load regulation
+*.param RADJU=277k
+*.param RADJB=249k
+*.param VSOURCE=5
+*.param ILOAD=2.5
+*.dc I1 0 {ILOAD} 1m
+*
+*out regulation
+.step param RADJU 100k 277k 1000
+.param RADJB=249k
+.param VSOURCE=12
+.param ILOAD=100m
+.op
+*
+.option noopiter
+.backanno
